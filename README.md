@@ -1,75 +1,54 @@
-## :potable_water: Faucet Backend
+# Faucet Repo
 
-Faucet backend is a simple endpoint backend service build on nodejs it allow user to request testnet [XEM](https://testnet-explorer.nemtool.com) and [XYM](https://testnet.symbol.fyi)(WIP) for development, it build on [Restify](http://restify.com/).
+- [Overview](#overview)
+- [Repository layout](#repository-layout)
+- [Contributing](#contributing)
+- [Getting Help](#getting-help)
+- [License](#license)
 
-## Requirement
+## Overview
 
-Node.js 12.22.0 or later
+Faucet is a simple application that allows the user to request testnet network currency to do development, it supported Nem and Symbol.
 
-## Structure
+In this project we split into frontend and backend, backend used for REST API allows the user to request faucet from the endpoint, and the frontend part mainly UI/UX component.
 
-- `services/nemRequest`: It's service layers, mainly doing API request from the nem nodes.
-- `controllers/nem`: it consume data from service layers, and process the data use for backend.
+```text
 
-## Usage
-
-Request XEM faucet
-
-``` bash
-curl -X POST -H "Content-Type: application/json" \
-    -d '{"address": "TCKH5L543TQKUPHIUAWMNYL7GNQYEY2UGMECB4D3", "amount": 10}' \
-    http://localhost:8080/claim/xem
-```
-
-Response
-
-```json
-{
-    "code":1,
-    "type":1,
-    "transactionHash":"9e7aefca8ad81ff37a2e8549539d922ccd821719a97e824a58814c3032f4dd85",
-    "amount":10,
-    "receiptAddress":"TCKH5L543TQKUPHIUAWMNYL7GNQYEY2UGMECB4D3"
-}
-```
-
-## Installation
-
-1. Clone the project.
+     ┌────────────┐  POST Request   ┌────────────────┐  Sign and     ┌─────────┐
+     │            ├────────────────►│                │  announce tx  │         │
+     │  Web page  │                 │  Backend REST  ├──────────────►│ Testnet │
+     │            │◄────────────────┤                │               │         │
+     └────────────┘  Json response  └────────────────┘               └─────────┘
 
 ```
-git clone https://github.com/NemProject/backend-faucet.git
-```
 
-2. Install the required dependencies.
 
-```
-cd backend-faucet
-npm install
-```
 
-## Development
+## Repository layout
 
-1. Create `.env` in root directory.
-```env
-NEM_FAUCET_ADDRESS=<Address>
-NEM_FAUCET_PRIVATE_KEY=<private key>
-NEM_ENDPOINT=http://hugetestalice.nem.ninja:7890
-RECEIPT_MAX_BALANCE=200000000 // 200
-SEND_OUT_MAX_AMOUNT=500000000 // 500
-MOSAIC_DIVISIBILITY=6
-PORT=8080
-```
+| Folder name | Description |
+| -------------|--------------|
+| [`/backend`](backend/) | Rest API service use for claim `xem` and `xym` faucet. |
+| [`/nem`](nem/) | Frontend application for Nem. |
+| [`/symbol`](symbol/) | Fronted application for Symbol. |
+| [`/tests`](tests/) | Collection of tests. |
 
-2. running in development
-```
-npm run dev
-```
+## Contributing
 
-3. Open [http://localhost:8080](http://localhost:8080) with your browser to see the result.
+Before contributing please [read this](CONTRIBUTING.md).
 
-## Building instructions
+## Getting Help
 
-```
-npm run build
-```
+- [Symbol Developer Documentation][developer documentation]
+- [Symbol Technical Reference][technical reference]
+- Join the community [discord][discord]
+- If you found a bug, [open a new issue][issues]
+
+## License
+
+Copyright (c) 2022 NEM & Symbol Contributors, licensed under the [MIT license](LICENSE).
+
+[developer documentation]: https://docs.symbolplatform.com/
+[discord]: https://discord.gg/fjkWXyf
+[issues]: https://github.com/symbol/faucet/issues
+[technical reference]: https://symbol.github.io/symbol-technicalref/main.pdf
