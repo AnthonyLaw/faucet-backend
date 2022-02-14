@@ -1,4 +1,5 @@
-const nemSDK = require('nem-sdk');
+// Todo: Replace new SDK
+// const nemSDK = require('nem-sdk');
 
 const helper = {
 	/**
@@ -33,16 +34,16 @@ const helper = {
 
 		let error = '';
 
-		if (!nemSDK.model.address.isValid(receiptAddress))
-			error = 'Address Invalid';
+		// if (!nemSDK.model.address.isValid(receiptAddress))
+		// 	error = 'Address Invalid';
 
 		if (transferAmount >= maxTransferAmount)
-			error = `Transfer amount can not more than ${this.toRelativeAmount(maxTransferAmount)}`;
+			error = `Transfer amount can not more than ${helper.toRelativeAmount(maxTransferAmount)}`;
 
-		if (receiptBalance.balance >= maxAmount)
+		if (receiptBalance >= maxAmount)
 			error = 'Your account already has enough balance.';
 
-		if (faucetBalance.balance < transferAmount)
+		if (faucetBalance < transferAmount)
 			error = 'Faucet balance not enough to pay out.';
 
 		if (0 < pendingTx.length)

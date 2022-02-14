@@ -6,6 +6,7 @@
     - [Requirement](#requirement)
     - [Usage](#usage)
     - [Installation](#installation)
+    - [Test](#test)
     - [lint check](#lint)
 
 ## Overview
@@ -77,6 +78,12 @@ PORT=8080
 ```shell
 npm run dev // Development
 npm run start // Production
+```
+
+# test
+
+```
+npm run test
 ```
 
 # lint
