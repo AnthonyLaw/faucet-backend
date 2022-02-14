@@ -4,6 +4,7 @@
 - [Repository layout](#repository-layout)
 - Instructions
     - [Installation](#installation)
+    - [Test](#test)
     - [lint check](#lint)
 
 # Overview
@@ -52,6 +53,12 @@ npm start
 ```
 
 5. Visit http://localhost:3000/#/ in your browser.
+
+# test
+
+```
+npm run test
+```
 
 # lint
 
