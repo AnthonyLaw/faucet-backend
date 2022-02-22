@@ -7,8 +7,17 @@ const restifyErrors = require('restify-errors');
 dotenv.config();
 
 const server = restify.createServer();
-
+server.use(restify.plugins.acceptParser('application/json'));
 server.use(restify.plugins.bodyParser());
+server.use(restify.plugins.queryParser({ mapParams: true }));
+
+// Setup cross domain access
+server.use((req, res, next) => {
+	res.header('Access-Control-Allow-Origin', '*');
+	res.header('Access-Control-Allow-Headers', 'Content-Type');
+	res.header('Access-Control-Allow-Methods', 'POST, GET');
+	next();
+});
 
 server.post('/claim/xem', async (req, res, next) => {
 	const receiptAddress = req.body.address;
