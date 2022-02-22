@@ -2,9 +2,9 @@ import './Home.scss';
 import nemLogo from '../../assets/images/nem-logo.png';
 import Form from '../../components/FaucetForm';
 import Footer from '../../components/Footer';
+import TwitterSignIn from '../../components/TwitterSignIn';
 import NemRequest from '../../services/nemRequest';
 import Helper from '../../utils/helper';
-// import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -37,6 +37,11 @@ const Home = function () {
 	});
 
 	const [isButtonDisable, setIsButtonDisable] = useState(false);
+
+	const [twitterAccountStatus, setTwitterAccountStatus] = useState({
+		isVerify: false,
+		screenName: ''
+	});
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -95,8 +100,8 @@ const Home = function () {
 		toast.info('Processing...', { autoClose: 10000 });
 
 		try {
-			// Todo: request faucet from the endpoint.
-
+			// Todo: Request faucet
+			toast.info('Working in Progress...', { autoClose: false });
 			// toast.success('Your request is being processed.', { autoClose: false });
 			// toast.success(ViewExplorerLink(data.transactionHash), { autoClose: false });
 		} catch (error) {
@@ -138,11 +143,20 @@ const Home = function () {
 						</p>
 					</div>
 
-					<Form
-						formInput={formInput}
-						setFormInput={setFormInput}
-						submitForm={onHandleSubmit}
-						isButtonDisable={isButtonDisable}
+					{ twitterAccountStatus && twitterAccountStatus.isVerify
+						? (
+							<Form
+								formInput={formInput}
+								setFormInput={setFormInput}
+								submitForm={onHandleSubmit}
+								isButtonDisable={isButtonDisable}
+							/>
+						)
+						: ''}
+
+					<TwitterSignIn
+						twitterAccountStatus={twitterAccountStatus}
+						setTwitterAccountStatus={setTwitterAccountStatus}
 					/>
 
 					<p>Done with your XEM? Send it back to the faucet. Remember, sharing is caring!</p>
