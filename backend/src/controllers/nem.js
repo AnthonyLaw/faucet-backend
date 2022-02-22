@@ -1,7 +1,10 @@
 const {
 	getNetworkTime, announceTransaction, getAccountInfo, getUnconfirmedTransactions
 } = require('../services/nemRequest');
+const dotenv = require('dotenv');
 const nemSDK = require('nem-sdk');
+
+dotenv.config();
 
 /**
  * Create signed transfer transaction.
