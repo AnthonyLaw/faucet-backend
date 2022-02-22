@@ -17,7 +17,8 @@
     "dotenv": "^16.0.0",
     "nem-sdk": "^1.6.8",
     "restify": "^8.6.0",
-    "restify-errors": "^8.0.2"
+    "restify-errors": "^8.0.2",
+    "twitter-api-v2": "^1.11.0"
   },
   "devDependencies": {
     "chai": "^4.3.6",
