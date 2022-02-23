@@ -4,6 +4,7 @@ const { TwitterApi } = require('twitter-api-v2');
 dotenv.config();
 const appKey = process.env.TWITTER_APP_KEY;
 const appSecret = process.env.TWITTER_APP_SECRET;
+const twitterCallback = process.env.TWITTER_CALLBACK_URL;
 
 const twitter = {
 	requestToken: async () => {
@@ -13,7 +14,7 @@ const twitter = {
 		});
 
 		try {
-			return await twitterClient.generateAuthLink('http://127.0.0.1:3000');
+			return await twitterClient.generateAuthLink(twitterCallback);
 		} catch (error) {
 			throw Error('fail to request twitter token');
 		}
