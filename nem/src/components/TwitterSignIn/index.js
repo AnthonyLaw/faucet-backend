@@ -2,6 +2,12 @@ import axios from 'axios';
 import PropTypes from 'prop-types';
 import React, { useState, useEffect } from 'react';
 
+const endpoint = process.env.REACT_APP_BACKEND_URL;
+
+const backendRequest = axios.create({
+	baseURL: endpoint
+});
+
 const TwitterSignIn = function ({
 	twitterAccountStatus,
 	setTwitterAccountStatus
@@ -11,7 +17,7 @@ const TwitterSignIn = function ({
 	const twitterAuth = async () => {
 		setIsLoading(true);
 
-		const { data } = await axios.get('http://127.0.0.1:8080/twitter/auth');
+		const { data } = await backendRequest.get('/twitter/auth');
 
 		localStorage.setItem('twitter_oauth_token_secret', data.oauth_token_secret);
 
@@ -36,7 +42,7 @@ const TwitterSignIn = function ({
 
 			const oauth_token_secret = localStorage.getItem('twitter_oauth_token_secret');
 
-			const { data } = await axios.get('http://127.0.0.1:8080/twitter/verify', {
+			const { data } = await backendRequest.get('/twitter/verify', {
 				params: {
 					oauth_token,
 					oauth_token_secret,
